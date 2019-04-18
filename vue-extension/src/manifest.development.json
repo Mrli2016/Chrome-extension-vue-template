@@ -1,0 +1,11 @@
+{
+    "manifest_version": 2,
+    "name": "fanqie",
+    "description": "番茄工作法是简单易行的时间管理方法，选择一个待完成的任务，将番茄时间设为25分钟，专注工作，中途不允许做任何与该任务无关的事，直到番茄时钟响起，然后短暂休息一下（5分钟就行），每4个番茄时段多休息一会儿。",
+    "version": "0.0.1",
+    "options_page": "options.html",
+    "browser_action": {
+        "default_popup": "popup.html"
+    },
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}
