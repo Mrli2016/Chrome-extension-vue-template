@@ -1,6 +1,7 @@
 <template>
   <div class="main_app">
     <h1>Hello popup 123!</h1>
+    <el-button>123123</el-button>
   </div>
 </template>
 
