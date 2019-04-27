@@ -1,23 +1,21 @@
-# vue-extension
+# vue-extension-template
+`vue-cli3` + `webpack4` + `element-ui`  实现编译打包Chrome浏览器插件
 
-## Project setup
+## 环境安装
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 开发环境编译并热更新
 ```
 npm run serve
+or
+npm run build-watch
 ```
 
-### Compiles and minifies for production
+### 生产环境打包
 ```
 npm run build
-```
-
-### Run your tests
-```
-npm run test
 ```
 
 ### Lints and fixes files

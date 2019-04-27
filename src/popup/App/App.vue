@@ -1,13 +1,13 @@
 <template>
   <div class="main_app">
-    <h1>Hello popup 123!</h1>
-    <el-button>123123</el-button>
+    <h1>Hello popup!</h1>
+    <el-button type="primary">primary</el-button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app',
+  name: 'app'
 }
 </script>
 
@@ -18,6 +18,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
