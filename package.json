@@ -6,7 +6,8 @@
     "serve": "vue-cli-service build-watch",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build-watch": "vue-cli-service build-watch"
+    "build-watch": "vue-cli-service build-watch",
+    "analyz": "npm_config_report=true npm run build"
   },
   "dependencies": {
     "core-js": "^2.6.5",

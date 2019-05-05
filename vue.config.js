@@ -33,5 +33,14 @@ module.exports = {
       // // enable scope hoisting
       // new webpack.optimize.ModuleConcatenationPlugin(),
     ]
+  },
+
+  chainWebpack: config => {
+    // 查看打包组件大小情况
+    if (process.env.npm_config_report) {
+      config
+        .plugin('webpack-bundle-analyzer')
+        .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+    }
   }
 };

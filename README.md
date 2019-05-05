@@ -18,6 +18,11 @@ npm run build-watch
 npm run build
 ```
 
+### 分析包组件大小
+```
+npm run analyz
+```
+
 ### Lints and fixes files
 ```
 npm run lint
