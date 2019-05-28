@@ -20,7 +20,7 @@ npm run build
 
 ### 分析包组件大小
 ```
-npm run analyz
+npm run analyze
 ```
 
 ### Lints and fixes files

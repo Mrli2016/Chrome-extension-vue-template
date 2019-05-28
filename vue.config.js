@@ -25,14 +25,23 @@ const plugins =
 
 module.exports = {
   pages: pagesObj,
+  // // 生产环境是否生成 sourceMap 文件
+  productionSourceMap: false,
+
   configureWebpack: {
-    plugins: [
-      CopyWebpackPlugin(plugins),
-      // // keep module.id stable when vendor modules does not change
-      // new webpack.HashedModuleIdsPlugin(),
-      // // enable scope hoisting
-      // new webpack.optimize.ModuleConcatenationPlugin(),
-    ]
+    entry: {
+      'content': './src/content/index.js'
+    },
+    output: {
+      filename: 'js/[name].js'
+    },
+    plugins: [CopyWebpackPlugin(plugins)]
+  },
+  css: {
+    extract: {
+      filename: 'css/[name].css'
+      // chunkFilename: 'css/[name].css'
+    }
   },
 
   chainWebpack: config => {
