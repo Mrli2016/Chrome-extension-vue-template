@@ -25,22 +25,15 @@ const manifest =
   };
 
 const plugins = [
-  CopyWebpackPlugin([
-    manifest,
-    // 将静态资源复制过来
-    {
-      from: path.resolve("src/assets"),
-      to: `${path.resolve("dist")}/assets`
-    }
-  ])
+  CopyWebpackPlugin([manifest])
 ]
 
-// 开发环境将热加载文件复制到静态文件夹
+// 开发环境将热加载文件复制到dist文件夹
 if (process.env.NODE_ENV !== 'production') {
   plugins.push(
     CopyWebpackPlugin([{
       from: path.resolve("src/utils/hot-reload.js"),
-      to: `${path.resolve("dist")}/assets`
+      to: path.resolve("dist")
     }])
   )
 }
