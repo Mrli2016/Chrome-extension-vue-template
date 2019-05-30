@@ -1,9 +1,9 @@
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const ZipPlugin = require('zip-webpack-plugin')
 const path = require("path");
 
 // Generate pages object
 const pagesObj = {};
-
 const chromeName = ["popup", "options"];
 
 chromeName.forEach(name => {
@@ -14,14 +14,46 @@ chromeName.forEach(name => {
   };
 });
 
-const plugins =
-  process.env.NODE_ENV === "production" ? [{
+// 生成manifest文件
+const manifest =
+  process.env.NODE_ENV === "production" ? {
     from: path.resolve("src/manifest.production.json"),
     to: `${path.resolve("dist")}/manifest.json`
-  }] : [{
+  } : {
     from: path.resolve("src/manifest.development.json"),
     to: `${path.resolve("dist")}/manifest.json`
-  }];
+  };
+
+const plugins = [
+  CopyWebpackPlugin([
+    manifest,
+    // 将静态资源复制过来
+    {
+      from: path.resolve("src/assets"),
+      to: `${path.resolve("dist")}/assets`
+    }
+  ])
+]
+
+// 开发环境将热加载文件复制到静态文件夹
+if (process.env.NODE_ENV !== 'production') {
+  plugins.push(
+    CopyWebpackPlugin([{
+      from: path.resolve("src/utils/hot-reload.js"),
+      to: `${path.resolve("dist")}/assets`
+    }])
+  )
+}
+
+// 生产环境打包dist为zip
+if (process.env.NODE_ENV === 'production') {
+  plugins.push(
+    new ZipPlugin({
+      path: path.resolve("dist"),
+      filename: 'dist.zip',
+    })
+  )
+}
 
 module.exports = {
   pages: pagesObj,
@@ -35,7 +67,7 @@ module.exports = {
     output: {
       filename: 'js/[name].js'
     },
-    plugins: [CopyWebpackPlugin(plugins)]
+    plugins: plugins,
   },
   css: {
     extract: {
@@ -44,7 +76,19 @@ module.exports = {
     }
   },
 
+
   chainWebpack: config => {
+    // 处理字体文件名，去除hash值
+    config.module
+      .rule('fonts')
+      .test(/\.(woff2?|eot|ttf|otf)(\?.*)?$/)
+      .use('url')
+      .loader('url-loader')
+      .options({
+        limit: 1000,
+        name: 'fonts/[name].[ext]'
+      })
+
     // 查看打包组件大小情况
     if (process.env.npm_config_report) {
       config

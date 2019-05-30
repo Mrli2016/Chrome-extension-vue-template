@@ -3,11 +3,19 @@ import {
     MessageBox
 } from 'element-ui';
 
-// 发现element的字体文件无法通过打包加载，所以另外通过cdn来加载样式
-let element_css = document.createElement('link');
-element_css.href = 'https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css'
-element_css.rel = "stylesheet"
-document.head.append(element_css)
+// 通过Chrome插件的API加载字体文件
+(function insertElementIcons() {
+    let elementIcons = document.createElement('style')
+    elementIcons.type = 'text/css';
+    elementIcons.textContent = `
+        @font-face {
+            font-family: "element-icons";
+            src: url('${ window.chrome.extension.getURL("fonts/element-icons.woff")}') format('woff'),
+            url('${ window.chrome.extension.getURL("fonts/element-icons.ttf ")}') format('truetype'); /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+        }
+    `
+    document.head.appendChild(elementIcons);
+})();
 
 MessageBox.alert('这是一段内容', '标题名称', {
     confirmButtonText: '确定',

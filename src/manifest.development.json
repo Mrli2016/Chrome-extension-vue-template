@@ -7,6 +7,9 @@
     "browser_action": {
         "default_popup": "popup.html"
     },
+    "background": {
+        "scripts": ["assets/hot-reload.js"]
+    },
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "content_scripts": [{
         "matches": [
@@ -19,5 +22,6 @@
             "js/content.js"
         ],
         "run_at": "document_end"
-    }]
+    }],
+    "web_accessible_resources": ["fonts/*"]
 }
