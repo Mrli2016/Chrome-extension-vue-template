@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "npm run build-watch",
+    "dev": "npm run build-watch",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "build-watch": "vue-cli-service build-watch",
@@ -23,6 +23,8 @@
     "copy-webpack-plugin": "^4.6.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
     "vue-cli-plugin-chrome-ext": "0.0.5",
     "vue-template-compiler": "^2.5.21",
     "zip-webpack-plugin": "^3.0.0"

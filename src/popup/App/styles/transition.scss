@@ -1,0 +1,23 @@
+/**
+ * @ Author: Gszs
+ * @ Create Time: 2020-01-27 21:49:45
+ * @ Modified by: Gszs
+ * @ Modified time: 2020-01-27 22:17:49
+ * @ Description: 过渡效果
+ */
+
+
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all .5s;
+}
+
+.fade-transform-enter {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}

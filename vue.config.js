@@ -4,12 +4,11 @@ const path = require("path");
 
 // Generate pages object
 const pagesObj = {};
-const chromeName = ["popup", "options"];
+const chromeName = ["popup", "options", "background"];
 
 chromeName.forEach(name => {
   pagesObj[name] = {
     entry: `src/${name}/index.js`,
-    template: "public/index.html",
     filename: `${name}.html`
   };
 });
@@ -31,10 +30,24 @@ const plugins = [
 // 开发环境将热加载文件复制到dist文件夹
 if (process.env.NODE_ENV !== 'production') {
   plugins.push(
-    CopyWebpackPlugin([{
-      from: path.resolve("src/utils/hot-reload.js"),
-      to: path.resolve("dist")
-    }])
+    CopyWebpackPlugin([
+      {
+        from: path.resolve("src/utils/hot-reload.js"),
+        to: path.resolve("dist")
+      },
+      { 
+        from: path.resolve("src/assets"),
+        to: `${path.resolve("dist")}/assets`
+      },
+      {
+        from: path.resolve("src/utils/background.js"),
+        to: path.resolve("dist")
+      },
+      {
+        from: path.resolve("src/utils/matchSearch.js"),
+        to: path.resolve("dist")
+      }
+    ])
   )
 }
 
@@ -44,7 +57,21 @@ if (process.env.NODE_ENV === 'production') {
     new ZipPlugin({
       path: path.resolve("dist"),
       filename: 'dist.zip',
-    })
+    }),
+    CopyWebpackPlugin([
+      {
+        from: path.resolve("src/assets"),
+        to: `${path.resolve("dist")}/assets`
+      },
+      {
+        from: path.resolve("src/utils/background.js"),
+        to: path.resolve("dist")
+      },
+      {
+        from: path.resolve("src/utils/matchSearch.js"),
+        to: path.resolve("dist")
+      }
+    ])
   )
 }
 
@@ -52,7 +79,7 @@ module.exports = {
   pages: pagesObj,
   // // 生产环境是否生成 sourceMap 文件
   productionSourceMap: false,
-
+  assetsDir: 'static',
   configureWebpack: {
     entry: {
       'content': './src/content/index.js'
@@ -71,6 +98,10 @@ module.exports = {
 
 
   chainWebpack: config => {
+
+    // 设置别名系统
+    config.resolve.alias.set('@', path.resolve('src'))
+
     // 处理字体文件名，去除hash值
     const fontsRule = config.module.rule('fonts')
 

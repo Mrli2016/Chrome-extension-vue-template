@@ -1,27 +1,30 @@
 {
     "manifest_version": 2,
-    "name": "vue-extension",
-    "description": "a chrome extension with vue-cli3",
+    "name": "快捷搜索小工具",
+    "description": "方便在一些有意思的网站进行快速搜索",
     "version": "0.0.1",
-    "options_page": "options.html",
     "browser_action": {
+        "default_icon": "assets/GCSearchx48.png",
+        "default_title": "快捷搜索小工具",
         "default_popup": "popup.html"
     },
     "background": {
-        "scripts": ["hot-reload.js"]
+        "page": "background.html",
+        "persistent": true
     },
-    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-    "content_scripts": [{
-        "matches": [
-            "*://*.baidu.com/*"
-        ],
-        "css": [
-            "css/content.css"
-        ],
-        "js": [
-            "js/content.js"
-        ],
-        "run_at": "document_end"
-    }],
-    "web_accessible_resources": ["fonts/*"]
+    "content_security_policy": "script-src 'self' 'unsafe-eval' https://at.alicdn.com/t/font_1609584_k66xj3dwj9.js; object-src 'self'",
+    "permissions": [
+        "tabs", "cookies", "contextMenus", "webRequest", "storage", "*://*/*"
+    ],
+    "web_accessible_resources": [
+        "fonts/*",
+        "assets/*",
+        "utils/*",
+        "*//at.alicdn.com/*"
+    ],
+    "homepage_url": "https://gszs.github.io/",
+    "icons": {
+        "128": "assets/GCSearchx128.png",
+        "48": "assets/GCSearchx48.png"
+    }
 }

@@ -1,8 +1,3 @@
-import {
-    Message,
-    MessageBox
-} from 'element-ui';
-
 // 通过Chrome插件的API加载字体文件
 (function insertElementIcons() {
     let elementIcons = document.createElement('style')
@@ -16,13 +11,3 @@ import {
     `
     document.head.appendChild(elementIcons);
 })();
-
-MessageBox.alert('这是一段内容', '标题名称', {
-    confirmButtonText: '确定',
-    callback: action => {
-        Message({
-            type: 'info',
-            message: `action: ${ action }`
-        });
-    }
-})
